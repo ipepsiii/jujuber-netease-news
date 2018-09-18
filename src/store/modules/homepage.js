@@ -4,7 +4,18 @@ const state = {
   list: [],
   offset: 0,
   limitation: 10,
-  part: 'news'
+  part: 'news',
+  partInfo: [
+    {name: "新闻", part: 'news'},
+    {name: "体育", part: 'sports'},
+    {name: "娱乐", part: 'ent'},
+    {name: "汽车", part: 'auto'},
+    {name: "科技", part: 'tech'},
+    {name: "财经", part: 'finance'},
+    {name: "独家", part: 'exclusive'},
+    {name: "和谐", part: 'society'}
+  ],
+  modalShowStatus: false
 };
 
 const mutations = {
@@ -25,6 +36,9 @@ const mutations = {
   },
   setPart(state, part) {
     state.part = part;
+  },
+  toggleModal(state){
+    state.modalShowStatus = !state.modalShowStatus
   }
 };
 
@@ -34,7 +48,13 @@ const getters = {
   },
   homePagePartSelection(state) {
     return state.part
-  }
+  },
+  homePagePartListInfo(state) {
+    return state.partInfo
+  },
+  modalShowStatus(state) {
+    return state.modalShowStatus
+}
 };
 
 const actions = {

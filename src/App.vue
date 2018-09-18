@@ -28,7 +28,7 @@
         text-align: center;
         max-width: 768px;
         width: 7.5rem;
-        background: #ffffff;
+        /*background: #ffffff;*/
         margin: 0 auto;
     }
 
