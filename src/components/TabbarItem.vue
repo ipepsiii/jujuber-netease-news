@@ -32,14 +32,6 @@
         text-align: left;
     }
 
-    .tab:first-child {
-        padding-left: .1rem;
-    }
-
-    .tab:last-child {
-        padding-right: .1rem;
-    }
-
     .tab-active {
         color: #000000;
         font-weight: bolder;

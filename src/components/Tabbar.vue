@@ -27,27 +27,32 @@
       ...mapGetters(['homePagePartSelection', 'homePagePartListInfo'])
     },
     methods: {
-      resize() {
-        if (this.currentIndex > 5) {
-          let deviceWidth = document.documentElement.clientWidth || window.innerWidth;
-          if (deviceWidth >= 750) {
-            deviceWidth = 750
-          }
-          else if (deviceWidth <= 320) {
-            deviceWidth = 320
-          }
-          let left = (Number(this.currentIndex) - 5) * 1.2 * deviceWidth / 7.5;
-          this.$refs.scrollBar.scrollLeft = left
+      resize(v) {
+
+        let deviceWidth = document.documentElement.clientWidth || window.innerWidth;
+        if (deviceWidth >= 750) {
+          deviceWidth = 750
         }
-         else if (this.$refs.scrollBar.scrollLeft && this.currentIndex<=5) {
-          console.log(11)
-          this.$refs.scrollBar.scrollLeft = 0
+        else if (deviceWidth <= 320) {
+          deviceWidth = 320
+        }
+        let left = (v - 5) * 1.2 * deviceWidth / 7.5 > 0 ?
+          (v - 5) * 1.2 * deviceWidth / 7.5 : 0;
+        let currentScrollLeft = this.$refs.scrollBar.scrollLeft;
+        if (currentScrollLeft >= left) {
+          if (this.currentIndex < this.homePagePartListInfo.length - 5) {
+            this.$refs.scrollBar.scrollLeft -= (this.homePagePartListInfo.length - 5 -v) * 1.2 * deviceWidth / 7.5;
+          }
+          return
+        }
+        if (v > 5) {
+          this.$refs.scrollBar.scrollLeft = left;
         }
       }
     },
     watch: {
-      currentIndex() {
-        this.resize()
+      currentIndex(v) {
+        this.resize(v)
       }
     }
   }
