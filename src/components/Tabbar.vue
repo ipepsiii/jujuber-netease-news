@@ -11,6 +11,13 @@
 <script>
   import TabbarItem from './TabbarItem';
   import {mapGetters} from 'vuex';
+  import TWEEN from '@tweenjs/tween.js';
+
+  function animate(time) {
+    requestAnimationFrame(animate);
+    TWEEN.update(time);
+  }
+  requestAnimationFrame(animate);
 
   export default {
     name: "Tabbar",
@@ -41,12 +48,27 @@
         let currentScrollLeft = this.$refs.scrollBar.scrollLeft;
         if (currentScrollLeft >= left) {
           if (this.currentIndex < this.homePagePartListInfo.length - 5) {
-            this.$refs.scrollBar.scrollLeft -= (this.homePagePartListInfo.length - 5 -v) * 1.2 * deviceWidth / 7.5;
+            let coords = { currentScrollLeft };
+            let tween = new TWEEN.Tween(coords)
+              .to({ currentScrollLeft: currentScrollLeft - (this.homePagePartListInfo.length - 5 -v) * 1.2 * deviceWidth / 7.5}, 400)
+              .easing(TWEEN.Easing.Quadratic.Out)
+              .onUpdate(()=> {
+                this.$refs.scrollBar.scrollLeft = coords.currentScrollLeft;
+              })
+              .start();
+            // this.$refs.scrollBar.scrollLeft -= (this.homePagePartListInfo.length - 5 -v) * 1.2 * deviceWidth / 7.5;
           }
           return
         }
         if (v > 5) {
-          this.$refs.scrollBar.scrollLeft = left;
+          let coords = { currentScrollLeft };
+          let tween = new TWEEN.Tween(coords)
+            .to({ currentScrollLeft: left}, 400)
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .onUpdate(()=> {
+              this.$refs.scrollBar.scrollLeft = coords.currentScrollLeft;
+            })
+            .start();
         }
       }
     },
