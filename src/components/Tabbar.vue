@@ -47,7 +47,7 @@
         let pxsToMove = num * 1.2 * deviceWidth / 7.5;
         let coords = { currentScrollLeft };
         let tween = new TWEEN.Tween(coords)
-          .to({ currentScrollLeft: currentScrollLeft + pxsToMove}, 400)
+          .to({ currentScrollLeft: currentScrollLeft + pxsToMove}, Math.abs(num)*300)
           .easing(TWEEN.Easing.Quadratic.Out)
           .onUpdate(()=> {
             this.$refs.scrollBar.scrollLeft = coords.currentScrollLeft;
