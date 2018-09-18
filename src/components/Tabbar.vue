@@ -39,6 +39,10 @@
           let left = (Number(this.currentIndex) - 5) * 1.2 * deviceWidth / 7.5;
           this.$refs.scrollBar.scrollLeft = left
         }
+         else if (this.$refs.scrollBar.scrollLeft && this.currentIndex<=5) {
+          console.log(11)
+          this.$refs.scrollBar.scrollLeft = 0
+        }
       }
     },
     watch: {
