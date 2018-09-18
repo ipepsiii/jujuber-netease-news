@@ -25,6 +25,7 @@
 
 
     .tab {
+        display: inline-block;
         width: 1.2rem;
         color: rgba(100, 100, 100, .8);
         font-weight: lighter;

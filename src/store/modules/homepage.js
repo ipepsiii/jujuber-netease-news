@@ -6,14 +6,14 @@ const state = {
   limitation: 10,
   part: 'news',
   partInfo: [
-    {name: "新闻", part: 'news'},
-    {name: "体育", part: 'sports'},
-    {name: "娱乐", part: 'ent'},
-    {name: "汽车", part: 'auto'},
-    {name: "科技", part: 'tech'},
-    {name: "财经", part: 'finance'},
-    {name: "独家", part: 'exclusive'},
-    {name: "和谐", part: 'society'}
+    {index:0,name: "新闻", part: 'news'},
+    {index:1,name: "体育", part: 'sports'},
+    {index:2,name: "娱乐", part: 'ent'},
+    {index:3,name: "汽车", part: 'auto'},
+    {index:4,name: "科技", part: 'tech'},
+    {index:5,name: "财经", part: 'finance'},
+    {index:6,name: "独家", part: 'exclusive'},
+    {index:7,name: "和谐", part: 'society'}
   ],
   modalShowStatus: false
 };

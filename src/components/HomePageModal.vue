@@ -10,7 +10,7 @@
                 <div class="news-part-meta">点击进入栏目</div>
             </div>
             <div class="news-part-items">
-                <NewsPartItem v-for="item in homePagePartListInfo()" :innerText="item.name" :key="item.part" :part="item.part" />
+                <NewsPartItem v-for="item in homePagePartListInfo()" :innerText="item.name" :key="item.key" :part="item.part" />
             </div>
         </div>
     </div>
