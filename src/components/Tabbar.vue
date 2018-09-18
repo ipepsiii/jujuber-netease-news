@@ -33,9 +33,9 @@
       },
       ...mapGetters(['homePagePartSelection', 'homePagePartListInfo'])
     },
-    methods: {
-      resize(v) {
-
+    watch: {
+      currentIndex(v,ov) {
+        let num = v - ov;
         let deviceWidth = document.documentElement.clientWidth || window.innerWidth;
         if (deviceWidth >= 750) {
           deviceWidth = 750
@@ -43,38 +43,16 @@
         else if (deviceWidth <= 320) {
           deviceWidth = 320
         }
-        let left = (v - 5) * 1.2 * deviceWidth / 7.5 > 0 ?
-          (v - 5) * 1.2 * deviceWidth / 7.5 : 0;
         let currentScrollLeft = this.$refs.scrollBar.scrollLeft;
-        if (currentScrollLeft >= left) {
-          if (this.currentIndex < this.homePagePartListInfo.length - 5) {
-            let coords = { currentScrollLeft };
-            let tween = new TWEEN.Tween(coords)
-              .to({ currentScrollLeft: currentScrollLeft - (this.homePagePartListInfo.length - 5 -v) * 1.2 * deviceWidth / 7.5}, 400)
-              .easing(TWEEN.Easing.Quadratic.Out)
-              .onUpdate(()=> {
-                this.$refs.scrollBar.scrollLeft = coords.currentScrollLeft;
-              })
-              .start();
-            // this.$refs.scrollBar.scrollLeft -= (this.homePagePartListInfo.length - 5 -v) * 1.2 * deviceWidth / 7.5;
-          }
-          return
-        }
-        if (v > 5) {
-          let coords = { currentScrollLeft };
-          let tween = new TWEEN.Tween(coords)
-            .to({ currentScrollLeft: left}, 400)
-            .easing(TWEEN.Easing.Quadratic.Out)
-            .onUpdate(()=> {
-              this.$refs.scrollBar.scrollLeft = coords.currentScrollLeft;
-            })
-            .start();
-        }
-      }
-    },
-    watch: {
-      currentIndex(v) {
-        this.resize(v)
+        let pxsToMove = num * 1.2 * deviceWidth / 7.5;
+        let coords = { currentScrollLeft };
+        let tween = new TWEEN.Tween(coords)
+          .to({ currentScrollLeft: currentScrollLeft + pxsToMove}, 400)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate(()=> {
+            this.$refs.scrollBar.scrollLeft = coords.currentScrollLeft;
+          })
+          .start();
       }
     }
   }
@@ -90,6 +68,8 @@
         height: .46rem;
         align-items: flex-start;
         justify-content: space-around;
+        padding-left: .1rem;
+        padding-right: .1rem;
     }
 
     .tab-main {
